@@ -37,6 +37,7 @@ import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import androidx.window.layout.FoldingFeature
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import org.linphone.LinphoneApplication.Companion.coreContext
+import org.linphone.LinphoneApplication.Companion.corePreferences
 import org.linphone.R
 import org.linphone.core.tools.Log
 import org.linphone.databinding.CallActiveFragmentBinding
@@ -173,6 +174,10 @@ class ActiveCallFragment : GenericCallFragment() {
         val numpadBottomSheetBehavior = BottomSheetBehavior.from(binding.callNumpad.root)
         numpadBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         numpadBottomSheetBehavior.skipCollapsed = true
+
+        if (corePreferences.automaticallyShowDialpad) {
+            callViewModel.showNumpad()
+        }
 
         val callStatsBottomSheetBehavior = BottomSheetBehavior.from(binding.callStats.root)
         callStatsBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
